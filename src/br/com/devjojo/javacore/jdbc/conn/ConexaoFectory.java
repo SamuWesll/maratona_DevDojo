@@ -1,9 +1,6 @@
 package br.com.devjojo.javacore.jdbc.conn;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class ConexaoFectory {
 
@@ -35,6 +32,17 @@ public class ConexaoFectory {
         try {
             if (statement != null) {
                 statement.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void closed(Connection conn, Statement statement, ResultSet rs) {
+        closed(conn, statement);
+        try {
+            if (rs != null) {
+                rs.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();

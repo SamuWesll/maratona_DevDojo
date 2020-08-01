@@ -16,12 +16,27 @@ public class CompradorEntity {
         this.nome = nome;
     }
 
+    public CompradorEntity(Integer id, String cpf, String nome) {
+        this.id = id;
+        this.cpf = cpf;
+        this.nome = nome;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CompradorEntity that = (CompradorEntity) o;
         return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public String toString() {
+        return "CompradorEntity{" +
+                "id=" + id +
+                ", cpf='" + cpf + '\'' +
+                ", nome='" + nome + '\'' +
+                '}';
     }
 
     @Override

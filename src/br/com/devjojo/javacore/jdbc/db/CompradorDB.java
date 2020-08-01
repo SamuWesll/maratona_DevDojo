@@ -4,8 +4,11 @@ import br.com.devjojo.javacore.jdbc.Entity.CompradorEntity;
 import br.com.devjojo.javacore.jdbc.conn.ConexaoFectory;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CompradorDB {
 
@@ -55,5 +58,42 @@ public class CompradorDB {
             e.printStackTrace();
         }
     }
+
+    public List<CompradorEntity> selectAll() {
+        String query = "SELECT id, nome, cpf FROM PUBLIC .COMPRADOR";
+        Connection conn = ConexaoFectory.getConnection();
+        List<CompradorEntity> listaComprador = new ArrayList<>();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()) {
+                listaComprador.add(new CompradorEntity(rs.getInt("id"),rs.getString("nome"),rs.getString("cpf")));
+            }
+            ConexaoFectory.closed(conn, statement, rs);
+            return listaComprador;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<CompradorEntity> searchByName(String name) {
+        String query = "SELECT * FROM COMPRADOR c WHERE c.NOME LIKE '%" + name +"%'";
+        Connection conn = ConexaoFectory.getConnection();
+        List<CompradorEntity> listaComprador = new ArrayList<>();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()) {
+                listaComprador.add(new CompradorEntity(rs.getInt("id"),rs.getString("nome"),rs.getString("cpf")));
+            }
+            ConexaoFectory.closed(conn, statement, rs);
+            return listaComprador;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }
