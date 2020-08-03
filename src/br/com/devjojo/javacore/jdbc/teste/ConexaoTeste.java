@@ -12,8 +12,9 @@ public class ConexaoTeste {
 //        deletar();
 //        alterar();
 //        List<CompradorEntity> lista = queryAll();
-        List<CompradorEntity> lista = queryByName("lice");
-        System.out.println(lista);
+//        List<CompradorEntity> lista = queryByName("a");
+//        System.out.println(lista);
+        System.out.println(CompradorDB.findById(1));
     }
 
     public static void inserir() {
@@ -28,7 +29,7 @@ public class ConexaoTeste {
     }
 
     public static void alterar() {
-        CompradorEntity compradorEntity = new CompradorEntity("124-456-789-10","Samuel");
+        CompradorEntity compradorEntity = new CompradorEntity("124-456-789-10","PrepareStatament");
         compradorEntity.setId(1);
         CompradorDB comprador = new CompradorDB();
         comprador.update(compradorEntity);
